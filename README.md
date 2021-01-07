@@ -4,6 +4,8 @@ Game prototype exploring the gambits mechanic seen in Final Fantasy 12, with mob
 
 Building for Chrome, portrait mobile, testing on Galaxy Note 8.
 
+https://shadowedgold.github.io/game-prototype-1/
+
 #### Current build includes: ####
 
 * Progression System
