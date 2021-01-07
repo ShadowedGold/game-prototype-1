@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <!--  Meta  -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test Project</title>
+  
+  <!--  Styles  -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- should be styles/index.processed.css on codepen  -->
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+<body>
+  <div class="container">
+    <div id="game">
+      <div id="foes">
+      </div><div id="allies"><!--
+        --><div class="ally"></div>
+      </div><div id="info"></div>
+    </div>
+    <div id="feed"></div>
+    <div id="menu"><!--
+      --><button name="area" onclick='toggleSection("area")'>area</button><!--
+      --><button name="shop" onclick='toggleSection("shop")'>shop</button><!--
+      --><button name="craft" onclick='toggleSection("craft")'>craft</button><!--
+      --><button name="inventory" onclick='toggleSection("inventory")'>inventory</button><!--
+      --><button name="bestiary" onclick='toggleSection("bestiary")'>bestiary</button><!--
+      --><button name="save" onclick='toggleSection("save")'>save</button>
+    </div>
+    <div id="allyDetails" class="hidden"></div>
+    <div id="area" class="hidden"></div>
+    <div id="shop" class="hidden"></div>
+    <div id="craft" class="hidden"></div>
+    <div id="inventory" class="hidden"></div>
+    <div id="bestiary" class="hidden"></div>
+    <div id="save" class="hidden">
+      <div class="btnHolder"><!--
+        --><button onclick="save()">save</button><!--
+        --><button onclick="retrieve()">load</button><!--
+        --><button onclick="deleteData()">delete</button>
+      </div><div class="inputHolder">
+        <input id="inputxt" type="text"></input>
+      </div><div id="outputxt"></div>
+    </div>
+    <div id="description" class="hidden"></div>
+  </div><script src="scripts/DragDropTouch.js"></script><script src="scripts/index.js"></script>
+</body>
+</html>
