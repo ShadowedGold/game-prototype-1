@@ -2,7 +2,7 @@
 
 Game prototype exploring the gambits mechanic seen in Final Fantasy 12, with mobile idle game leanings.
 
-Building for Chrome, portrait mobile, testing on Galaxy Note 8.
+For the purposes of testing, building for Chrome, portrait mobile, testing on Galaxy Note 8.
 
 https://shadowedgold.github.io/game-prototype-1/
 
