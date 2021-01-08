@@ -854,7 +854,7 @@ var enemyTypes = {
         charNum = 64 + (spawnNum % 26),
         letter = (charNum > 64) ? String.fromCharCode(charNum) : String.fromCharCode(64+26);
     
-    var spawnHp = (level-1)*enemyType.statIPL.strength+enemyType.maxHp;
+    var spawnHp = (level-1)*enemyType.statIPL.hp+enemyType.maxHp;
 
     var enemy = {
       name: enemyType.name+' '+letter,
