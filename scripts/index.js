@@ -854,7 +854,7 @@ var enemyTypes = {
         charNum = 64 + (spawnNum % 26),
         letter = (charNum > 64) ? String.fromCharCode(charNum) : String.fromCharCode(64+26);
     
-    var spawnHp = (level-1)*enemyType.statIPL.hp+enemyType.maxHp;
+        var spawnHp = (level-1)*enemyType.statIPL.hp+enemyType.maxHp;
 
     var enemy = {
       name: enemyType.name+' '+letter,
@@ -2222,13 +2222,76 @@ function setArea(newArea) {
   clearAllEnemies();
   showArea();
 }
+// dialogue stuff
+function closeDialogue() {
+  // close the dialogue
+  document.getElementById("dialogue").remove();
+}
+function confirmDialogue(item, type) {
+  // get the value
+  var num = parseInt(document.getElementById("amount").value);
+
+  // confirm the dialogue
+  switch (type) {
+    case "buy":
+      buy(item, num);
+      break;
+    case "sell":
+      sell(item, num);
+      break;
+    case "craft":
+      craft(item, num);
+      break;
+  }
+
+  // close dialogue
+  closeDialogue();
+}
+function checkInput(input, max) {
+  var checking = parseInt(input.value, 10);
+
+  if (checking == NaN || checking < 1) input.value = 1;
+  else if (checking > max) input.value = max;
+}
+function showDialogue(item, type) {
+  var max,
+      msg = capitalizeFirstLetter(type)+" how many "+itemTypes[item].name+"s?",
+      dialogue = document.createElement("div");
+
+  // set max
+  switch (type) {
+    case "buy":
+      max = Math.floor(resources.data.gold / itemTypes[item].buy);
+      break;
+    case "sell":
+      max = resources.data[item];
+      break;
+    case "craft":
+      var maxArr = [];
+
+      Object.keys(craftingRecipes[item]).forEach( ingredient => {
+        maxArr.push(Math.floor(resources.data[ingredient] / craftingRecipes[item][ingredient]));
+      });
+
+      max = Math.min(...maxArr);
+      break;
+  }
+
+  dialogue.id = 'dialogue';
+  
+  dialogue.innerHTML =
+  "<div class='content'>"+
+    "<div>"+msg+"</div>"+
+    "<div class='row'>"+
+      "<input type='number' id='amount' name='amount' min='1' max=\'"+max+"\' value='1' oninput='checkInput(this, \""+max+"\")'>"+
+      "<button class='material-icons' onclick='closeDialogue()'>clear</button>"+
+      "<button class='material-icons' onclick='confirmDialogue(\""+item+"\", \""+type+"\")'>check</button>"+
+    "</div>"+
+  "</div>";
+
+  descriptionEl.parentNode.insertBefore(dialogue, descriptionEl.nextSibling);
+}
 // shop stuff
-function showBuyDialogue(item) {
-  var max = Math.floor(resources.data.gold / itemTypes[item].buy); 
-}
-function showSellDialogue(item) {
-  var max = resources.data[item];
-}
 function isShopFilter(filterName) {
   return Object.keys(itemTypes).some( item => {
     if (subMenu == "buy") {
@@ -2330,7 +2393,7 @@ function showShop() {
         "<div>"+itemTypes[item][subMenu]+"G</div>"+
         "<div>"+owned+"</div>"+
         "<div>"+
-          "<button onclick='"+subMenu+"(\""+item+"\")' "+btnDisabled+">"+subMenu+"</button>"+
+          "<button onclick='showDialogue(\""+item+"\", \""+subMenu+"\")' "+btnDisabled+">"+subMenu+"</button>"+
         "</div>"+
       "</div>";
     });
@@ -2356,15 +2419,6 @@ function sell(item, optNum) {
   showShop();
 }
 // craft stuff
-function showCraftDialogue(recipe) {
-  var maxArr = [];
-
-  Object.keys(craftingRecipes[recipe]).forEach( ingredient => {
-    maxArr.push(Math.floor(resources.data[ingredient] / craftingRecipes[recipe][ingredient]));
-  });
-
-  var max = Math.min(...maxArr);
-}
 function isCraftFilter(filterName) {
   return Object.keys(craftingRecipes).some( recipe => {
     var knownRecipe = true;
@@ -2541,7 +2595,7 @@ function showCraft() {
         "<div class='col'>"+ingredientList+"</div>"+
         "<div class='col'>"+
           "<div class='lineItem'>"+
-            "<button onclick='craft(\""+recipe+"\")' "+btnDisabled+">craft</button>"+
+            "<button onclick='showDialogue(\""+recipe+"\", \"craft\")' "+btnDisabled+">craft</button>"+
           "</div>"+
         "</div>"+
       "</div>";

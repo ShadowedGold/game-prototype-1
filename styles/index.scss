@@ -20,6 +20,7 @@ body {
   box-sizing: border-box;
 }
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-width: 396px;
@@ -45,7 +46,7 @@ body {
 #save, #feed, #description {
   padding: 8px;
 }
-#game, #feed, #equipment, #gambits, #area, #shop, #craft, #inventory, #bestiary, #save, #description, #menu, #skills, #allyDetails, button, input {
+#game, #feed, #equipment, #gambits, #area, #shop, #craft, #inventory, #bestiary, #save, #description, #menu, #skills, #allyDetails, #dialogue, button, input {
   font-size: 16px;
   font-family: Arial;
 }
@@ -64,7 +65,7 @@ body {
   width: 100%;
 }
 
-//buttons, select, input elements
+// buttons, select, input elements
 button, input {
   color: black;
   background-color: white;
@@ -116,7 +117,7 @@ select:disabled {
   width: min-content;
 }
 
-//icons
+// icons
 .icon-accessory, .icon-armour, .icon-elements, .icon-healing,
 .icon-ingredient, .icon-item, .icon-weapon,
 .icon-regenerating, .icon-poisoned, .icon-fast, .icon-slow,
@@ -126,7 +127,7 @@ select:disabled {
   background-position-x: 50%;
   background-position-y: 50%;
 }
-//filter icons
+// filter icons
 .icon-accessory, .icon-armour, .icon-elements, .icon-healing,
 .icon-ingredient, .icon-item, .icon-weapon {
   width: 34px;
@@ -154,7 +155,7 @@ select:disabled {
 .icon-weapon {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 35 35' fill='black' width='20px' height='20px'><path d='M22.78,5,9.93,17.81l2.92,2.92L25,8.59A1,1,0,0,1,26.41,10L14.27,22.15l2.92,2.92L30.05,12.22C35.06,7.21,35,0,35,0S27.79-.06,22.78,5Z'/><path d='M3.84,26.8A4.11,4.11,0,1,0,7,33.8,4.15,4.15,0,0,0,8.2,31.16L10,29.42,5.58,25.05Z'/><path d='M7,17.83a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l2.91,2.91L7,23.64,11.36,28l1.49-1.49,2.91,2.91a1,1,0,0,0,.71.29,1,1,0,0,0,.7-1.71Z'/></svg>");
 }
-//status effect icons
+// status effect icons
 .statuses {
   display: flex;
 }
@@ -196,7 +197,7 @@ select:disabled {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 35 35' fill='crimson' width='20px' height='20px'><path d='M2.5,35,12.5,33.5,5.5,29.5,2.5,35Z'/><path d='M3.77,19.36,0,25.5,6.55,26.47,3.77,19.36Z'/><path d='M28,34.5,34,34.5,35,29.5,28,34.5Z'/><path d='M29.87,10.55a11.72,11.72,0,0,0-1.13-1v6.82L21.5,19.56l-2,5v-6l5-4L21.56,6.78a12.84,12.84,0,0,0-5.83.94L10.08,2.06l.35-.35A1,1,0,0,0,9,.29L8,1.35H8L2.3,7h0L1.24,8.07a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0L3,9.13l5.66,5.66a13,13,0,1,0,21.21-4.24Z'/></svg>");
 }
 
-//feed
+// feed
 #feed {
   display: flex;
   height: calc( calc(20px * 3) + 10px);
@@ -249,7 +250,7 @@ select:disabled {
   color: var(--highlight-color);
 }
 
-//game
+// game
 #game {
   display: block;
   width: 100%;
@@ -357,7 +358,7 @@ select:disabled {
   padding: 2px 4px;
 }
 
-//menu & subMenu
+// menu & subMenu
 #menu, .subMenu, .filter {
   display: flex;
   flex-grow: 0;
@@ -404,7 +405,7 @@ select:disabled {
   min-width: 34px;
 }
 
-//equipment
+// equipment
 #equipment {
   display: flex;
   align-items: stretch;
@@ -510,7 +511,7 @@ select:disabled {
   }
 }
 
-//skills
+// skills
 #skills {
   display: flex;
   flex-direction: column;
@@ -547,7 +548,7 @@ select:disabled {
   }
 }
 
-//gambits
+// gambits
 .gambits {
   padding-left: 8px;
 }
@@ -657,7 +658,7 @@ select:disabled {
   opacity: 0.5;
 }
 
-//item list
+// item list
 .item {
   display: flex;
   user-select: none;
@@ -691,7 +692,7 @@ select:disabled {
   }
 }
 
-//area & bestiary
+// area & bestiary
 #area .item.desc, #bestiary .item.inset {
   padding-left: 8px;
   margin-top: 4px;
@@ -760,7 +761,7 @@ select:disabled {
   }
 }
 
-//shop
+// shop
 #shop .item div:not(:first-child) {
   text-align: right;
   width: calc( calc( 100% / 9 ) * 2);
@@ -769,7 +770,7 @@ select:disabled {
   width: calc( calc( 100% / 9 ) * 3);
 }
 
-//craft
+// craft
 #craft .item, #craft .item.title {
   padding-top: 0;
   padding-bottom: 0;
@@ -822,7 +823,7 @@ select:disabled {
   text-align: right;
 }
 
-//inventory
+// inventory
 #inventory .item div:not(:first-child) {
   text-align: right;
   width: calc( calc( 100% / 6 ) * 2);
@@ -831,7 +832,7 @@ select:disabled {
   width: calc( calc( 100% / 6 ) * 3);
 }
 
-//description
+// description
 #description {
   flex-shrink: 0;
 }
@@ -864,7 +865,7 @@ select:disabled {
   }
 }
 
-//save
+// save
 .btnHolder {
   width: max-content;
   float: right;
@@ -881,7 +882,45 @@ select:disabled {
   padding-top: 8px;
 }
 
-//hide
+// dialogue
+#dialogue {
+  position: absolute;
+  background-color: rgba(0,0,0,0.75);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#dialogue .content {
+  border: 1px solid var(--border-color);
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: fit-content;
+  padding: 8px;
+  box-sizing: border-box;
+
+  & .row {
+    display: flex;
+    flex-direction: start;
+    height: 26px;
+    margin-top: 8px;
+    
+    & button {
+      font-size: 24px;
+      padding: 0 3px;
+      height: 100%;
+    }
+  }
+}
+
+// hide
 #game.hidden, #feed.hidden, #equipment.hidden, #gambits.hidden, #area.hidden, #shop.hidden, #craft.hidden, #inventory.hidden, #bestiary.hidden, #save.hidden, #menu.hidden, #description.hidden, #skills.hidden, #allyDetails.hidden {
   display: none;
 }
