@@ -54,7 +54,6 @@ https://shadowedgold.github.io/game-prototype-1/
 * Gambits
   * Can set, turn off and reprioritise automatic actions based on conditions
   * Need to add more conditions
-  * Need to remove old conditions using MP
 
 * Bestiary
   * As you see new enemies, and defeat them, more info is added to the bestiary
