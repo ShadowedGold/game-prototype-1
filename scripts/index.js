@@ -12,7 +12,6 @@ var logging = {
 
 var baseStats = {
   maxHp: 80,
-  //maxMp: 4,
   strength: 20,
   statIPL: {strength: 3,
             hp: 10},
@@ -21,7 +20,6 @@ var baseStats = {
 var charStats = {
   name: 'name',
   hp: baseStats.maxHp,
-  //mp: baseStats.maxMp,
   lvl: 1,
   totalXp: 0,
   xp: 0,
@@ -29,7 +27,6 @@ var charStats = {
   totalLp: 0,
   lp: 0,
   maxHp: (1-1)*baseStats.statIPL.hp+baseStats.maxHp,
-  //maxMp: Math.floor(1/2)*1+baseStats.maxMp,
   strength: (1-1)*baseStats.statIPL.strength+baseStats.strength,
   speed: baseStats.speed,
   type: 'ally',
@@ -38,7 +35,6 @@ var charStats = {
     return {
       name: this.name,
       hp: this.hp,
-      //mp: this.mp,
       lvl: this.lvl,
       totalXp: this.totalXp,
       xp: this.xp,
@@ -53,14 +49,12 @@ var charStats = {
   update: function (me) {
     this.name = me.name;
     this.hp = me.hp;
-    this.mp = me.mp;
     this.lvl = me.lvl;
     this.totalXp = me.totalXp;
     this.xp = me.xp;
     this.bp = me.bp;
     this.lp = me.lp;
     this.maxHp = (me.lvl-1)*baseStats.statIPL.hp+baseStats.maxHp;
-    //this.maxMp = Math.floor(me.lvl/2)*1+baseStats.maxMp;
     this.strength = (me.lvl-1)*baseStats.statIPL.strength+baseStats.strength;
     this.speed = baseStats.speed;
     this.gambits = me.gambits;
@@ -133,7 +127,7 @@ var entities = {
 
 var gambits = {
   target: ['self', 'ally', 'enemy'],
-  condition: ['any','highest hp','highest max hp','hp < 25%','hp < 50%','hp < 75%','hp < 100%','lowest hp','lowest max hp','mp < 25%','mp < 50%','mp < 75%','mp < 100%','nearest','status: KO'],
+  condition: ['any','highest hp','highest max hp','hp < 25%','hp < 50%','hp < 75%','hp < 100%','lowest hp','lowest max hp','nearest','status: KO'],
   action: [// ( 0- 5) skills
            'attack', 'steal', 'taunt1', 'taunt2', 'interrupt', 'psyonic',
            // ( 6-11) magic - debuff
@@ -148,9 +142,9 @@ var gambits = {
            'air1', 'air2', 'air3', 'air4', 'air5', 'air6', 'earth1', 'earth2', 'earth3', 'earth4', 'earth5', 'earth6', 'fire1', 'fire2', 'fire3', 'fire4', 'fire5', 'fire6', 'water1', 'water2', 'water3', 'water4', 'water5', 'water6'],
   rules: {
     condition: {
-      self: [3,4,5,6,9,10,11,12],
+      self: [3,4,5,6],
       ally: ['all'],
-      enemy: [0,1,2,3,4,5,6,7,8,13]
+      enemy: [0,1,2,3,4,5,6,7,8,9]
     },
     action: {
       self: [0,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],
@@ -2047,7 +2041,7 @@ function getDt() {
   var dt = now - lastUpdate;
   lastUpdate = now;
   return dt;
-}//game stuff
+}
 // menu stuff
 function addHighlight(section) {
   document.getElementsByName(section)[0].classList.add('highlight');
@@ -3822,30 +3816,6 @@ function getAction(me) {
                 if (entity.maxHp < target.maxHp) target = entity;
               }
               break;
-            case 'mp < 25%':
-              if (entity.mp < (entity.maxMp / 4)) {
-                target = entity;
-                actionable = true;
-              }
-              break;
-            case 'mp < 50%':
-              if (entity.mp < (entity.maxMp / 2)) {
-                target = entity;
-                actionable = true;
-              }
-              break;
-            case 'mp < 75%':
-              if (entity.mp < ((entity.maxMp / 4) * 3)) {
-                target = entity;
-                actionable = true;
-              }
-              break;
-            case 'mp < 100%':
-              if (entity.mp < entity.maxMp) {
-                target = entity;
-                actionable = true;
-              }
-              break;
             case 'nearest':
               target = entity;
               actionable = true;
@@ -4555,7 +4525,6 @@ function showGame() {
     allyEls[i].innerHTML =
     "<div class='info'>"+
       "<span class='name'>"+ally.name+"</span><br>"+
-      //"MP: "+ally.mp+"/"+ally.maxMp+"<br>"+
       "Level: "+ally.lvl+
       "<div class='statuses'>"+displayStatuses(ally)+"</div>"+
     "</div>"+
